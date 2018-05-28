@@ -123,10 +123,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __extends = 
                     return _this;
                 }
                 FacetSliderForRange.prototype.onFirstQuery = function (args) {
-                    args.queryBuilder.groupByRequests.push(this.getGroupByRequest(String(this.options.maxField), "maximum"));
-                    args.queryBuilder.groupByRequests.push(this.getGroupByRequest(String(this.options.minField), "minimum"));
+                    args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.maxField), "maximum"));
+                    args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.minField), "minimum"));
                 };
-                FacetSliderForRange.prototype.getGroupByRequest = function (field, operation) {
+                FacetSliderForRange.getGroupByRequest = function (field, operation) {
                     return {
                         completeFacetWithStandardValues: true,
                         field: field,

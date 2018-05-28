@@ -57,11 +57,11 @@ export default function lazyFacetSliderForRange(): Promise<IComponentDefinition>
             }
 
             private onFirstQuery(args: IDuringQueryEventArgs) {
-                args.queryBuilder.groupByRequests.push(this.getGroupByRequest(String(this.options.maxField), "maximum"));
-                args.queryBuilder.groupByRequests.push(this.getGroupByRequest(String(this.options.minField), "minimum"));
+                args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.maxField), "maximum"));
+                args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.minField), "minimum"));
             }
 
-            private getGroupByRequest(field: string, operation: string): IGroupByRequest {
+            private static getGroupByRequest(field: string, operation: string): IGroupByRequest {
                 return {
                     completeFacetWithStandardValues: true,
                     field: field,

@@ -1,5 +1,2 @@
-// This entry point defines all the component that should be included in your extension.
-
-export { HelloWorld } from './ui/HelloWorld';
-export * from './ui/FacetReset';
-export * from './ui/FacetSliderForRange';
+export * from './Facet/FacetReset';
+export * from './Facet/FacetSliderForRange';

@@ -1,6 +1,8 @@
 # coveo-components
 This project extends the [Coveo Javascript Search Framework](https://github.com/coveo/search-ui) with additional components.
 
+This project was created using the [coveo-ui-seed](https://github.com/coveo/search-ui-seed) project starter kit.
+
 ## Installation
 
 ## Component Library

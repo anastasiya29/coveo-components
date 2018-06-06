@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "module": "AMD",
+    "module": "commonjs",
     "target": "es5",
-    "declaration": true,
+    "declaration": false,
     "noImplicitAny": false,
-    "sourceMap": true,
-    "skipLibCheck": true
+    "sourceMap": false
   },
   "include": [
-    "node_modules/@types/**/*.d.ts",
-    "node_modules/coveo-search-ui/bin/ts/*.ts",
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

@@ -17,7 +17,7 @@ export class FacetReset extends Component {
 	private resetButton: HTMLElement;
 
 	static options: IFacetResetOptions = {
-		resetText: ComponentOptions.buildStringOption({required: true})
+		resetText: ComponentOptions.buildStringOption({ defaultValue: "Reset" })
 	};
 
 	constructor(public element: HTMLElement, public options: IFacetResetOptions, public bindings: IComponentBindings) {

@@ -22,7 +22,7 @@ export class FacetReset extends Component {
 
 	constructor(public element: HTMLElement, public options: IFacetResetOptions, public bindings: IComponentBindings) {
 		super(element, FacetReset.ID, bindings);
-		ComponentOptions.initComponentOptions(element, FacetReset, options)
+		ComponentOptions.initComponentOptions(element, FacetReset, options);
 		this.bind.onRootElement(InitializationEvents.afterComponentsInitialization, () => this.onDoneLoading());
 		this.resetButton = this.createResetButton(options.resetText);
 	}

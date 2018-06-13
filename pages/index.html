@@ -26,6 +26,11 @@
     </div>
     <div class="coveo-main-section">
       <div class="coveo-facet-column">
+        <div class="CoveoRecentSearches" data-search-page="/">
+          <script class="result-template" type="text/x-underscore-template">
+            <a href="<%= searchPage %>#q=<%= termUrlEncoded %>"><%= term %></a>
+          </script>
+        </div>
         <div class="CoveoFacetReset" data-reset-text="Reset">
           <div class="CoveoFacet" data-title="Type" data-field="@objecttype" data-tab="All"></div>
           <div class="CoveoFacet" data-title="FileType" data-field="@filetype" data-tab="All"></div>

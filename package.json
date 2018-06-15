@@ -15,17 +15,11 @@
   "keywords": [
     "coveo",
     "search",
-    "ui",
-    "framework",
-    "js",
-    "typescript",
-    "jssearch",
-    "jsui",
-    "starter",
-    "seed"
+    "components",
+    "typescript"
   ],
   "author": "Anastasiya Flynn",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^2.6.0",
     "colors": "^1.1.2",

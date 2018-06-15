@@ -3,49 +3,6 @@ This project extends the [Coveo Javascript Search Framework](https://github.com/
 
 This project was created using the [coveo-ui-seed](https://github.com/coveo/search-ui-seed) project starter kit.
 
-## Jump to...
-<div>
-    <ol>
-        <li>
-            <a href="#Installation">Installation</a>
-        </li>
-        <li>
-            <a href="#Component-Library">Component Library</a>
-            <ul>
-                <li>
-                    <a href="#Facet-Reset">Facet Reset</a>
-                </li>
-                <li>
-                    <a href="#Facet-Slider-For-Range">Facet Slider For Range</a>
-                </li>
-                <li>
-                    <a href="#Recent-Searches">Recent Searches</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#Contributing-To-This-Project">Contributing To This Project</a>
-            <ul>
-                <li>
-                    <a href="#Local-Setup">Local Setup</a>
-                </li>
-                <li>
-                    <a href="#Best-practices-for-writing-reusable-components">Best practices for writing reusable components</a>
-                </li>
-            </ul>
-        </li>
-    </ol>
-</div>
-
-## Installation
-```bash
-npm install coveo-components
-```
-or
-```bash
-yarn add coveo-components
-```
-
 ## Component Library
 ### Facet Reset
 A button that resets a group of Facets. The group of Facets controlled by this button must be descendants of this component in the DOM. Multiple resetable facet groups may exist on a single page.

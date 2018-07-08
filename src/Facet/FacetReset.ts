@@ -22,7 +22,7 @@ export class FacetReset extends Component {
 	constructor(public element: HTMLElement, public options: IFacetResetOptions, public bindings: IComponentBindings) {
 		super(element, FacetReset.ID, bindings);
 		ComponentOptions.initComponentOptions(element, FacetReset, options);
-		this.bind.onRootElement(InitializationEvents.afterComponentsInitialization, () => this.onDoneLoading());
+		this.bind.onRootElement(InitializationEvents.afterComponentsInitialization, () => this.onAfterComponentsInitialization());
 		this.resetButton = this.createResetButton(options.resetText);
 	}
 
@@ -34,7 +34,7 @@ export class FacetReset extends Component {
 		return element;
 	}
 
-	protected onDoneLoading() {
+	protected onAfterComponentsInitialization() {
 		const facets = [], facetElements = this.element.querySelectorAll('[class^=CoveoFacet]');
 		Array.prototype.slice.call(facetElements).forEach((facet) => facets.push(Coveo.get(facet) as Coveo.Facet));
 		this.facets = facets;

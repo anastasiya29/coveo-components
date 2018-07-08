@@ -53,7 +53,7 @@ export class RecentSearches extends Component {
         const existing = this.terms.indexOf(term);
 
         if (existing > -1) {
-        this.terms.splice(existing, 1);
+            this.terms.splice(existing, 1);
         }
 
         if (this.terms.length === this.options.maxNumberOfTerms) {

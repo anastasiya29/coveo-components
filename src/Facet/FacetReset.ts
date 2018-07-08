@@ -5,7 +5,6 @@
 	Initialization,
 	InitializationEvents
 } from 'coveo-search-ui';
-import * as $ from 'jquery';
 
 export interface IFacetResetOptions {
 	resetText: string;
@@ -17,7 +16,7 @@ export class FacetReset extends Component {
 	private resetButton: HTMLElement;
 
 	static options: IFacetResetOptions = {
-		resetText: ComponentOptions.buildStringOption({ defaultValue: "Reset" })
+		resetText: ComponentOptions.buildStringOption({ defaultValue: 'Reset' })
 	};
 
 	constructor(public element: HTMLElement, public options: IFacetResetOptions, public bindings: IComponentBindings) {
@@ -28,21 +27,18 @@ export class FacetReset extends Component {
 	}
 
 	protected createResetButton(text: string): HTMLElement {
-		const element = document.createElement("button");
-		element.classList.add("coveo-facet-reset-button");
-		element.setAttribute("type", "button");
+		const element = document.createElement('button');
+		element.classList.add('coveo-facet-reset-button');
+		element.setAttribute('type', 'button');
 		element.textContent = text;
 		return element;
 	}
 
 	protected onDoneLoading() {
-		const facets = [];
-		$(this.element).find("[class^=CoveoFacet]").each(function() {
-			facets.push(Coveo.get(this) as Coveo.Facet);
-		});
-
+		const facets = [], facetElements = this.element.querySelectorAll('[class^=CoveoFacet]');
+		Array.prototype.slice.call(facetElements).forEach((facet) => facets.push(Coveo.get(facet) as Coveo.Facet));
 		this.facets = facets;
-		this.resetButton.addEventListener("click", this.onClick.bind(this));
+		this.resetButton.addEventListener('click', this.onClick.bind(this));
 		this.element.appendChild(this.resetButton);
 	}
 

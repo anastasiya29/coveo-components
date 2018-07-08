@@ -8,8 +8,7 @@ import {
     Initialization,
     QueryEvents
 } from 'coveo-search-ui';
-import * as _ from "underscore";
-import * as $ from "jquery";
+import * as _ from 'underscore';
 
 export interface IRecentSearchesOptions {
     cookie: string;
@@ -26,17 +25,17 @@ export class RecentSearches extends Component {
     protected terms: string[] = [];
 
     static options: IRecentSearchesOptions = {
-        cookie: ComponentOptions.buildStringOption({ defaultValue: "coveo-recent-searches" }),
+        cookie: ComponentOptions.buildStringOption({ defaultValue: 'coveo-recent-searches' }),
         maxNumberOfTerms: ComponentOptions.buildNumberOption({ defaultValue: 10 }),
         searchPage: ComponentOptions.buildStringOption({ required: true }),
-        header: ComponentOptions.buildStringOption({ defaultValue: "Recent Searches" })
+        header: ComponentOptions.buildStringOption({ defaultValue: 'Recent Searches' })
     };
 
     constructor(public element: HTMLElement, public options: IRecentSearchesOptions, public bindings: IComponentBindings) {
         super(element, RecentSearches.ID, bindings);
         ComponentOptions.initComponentOptions(element, RecentSearches, options);
 
-        this.template = _.template($("script.result-template", this.element).html());
+        this.template = _.template(this.element.querySelector('script.result-template').innerHTML);
         this.buildDom();
         this.readTermsFromCookie(options.cookie);
         this.renderDom();
@@ -46,10 +45,21 @@ export class RecentSearches extends Component {
     }
 
     public addSearchTerm(term: string) {
-        if (!term || !term.length) return;
+        if (!term || !term.length) {
+            return;
+        }
+
+        term = term.trim();
         const existing = this.terms.indexOf(term);
-        if (existing > -1) this.terms.splice(existing, 1);
-        if (this.terms.length === this.options.maxNumberOfTerms) this.terms.pop();
+
+        if (existing > -1) {
+        this.terms.splice(existing, 1);
+        }
+
+        if (this.terms.length === this.options.maxNumberOfTerms) {
+            this.terms.pop();
+        }
+
         this.terms.unshift(term);
         Cookie.set(this.options.cookie, JSON.stringify(this.terms));
         this.resetDom();
@@ -58,21 +68,23 @@ export class RecentSearches extends Component {
 
     public onDoneBuildingQuery(args: IDuringQueryEventArgs) {
         const parts = args.queryBuilder.expression.getParts();
-        if (parts.length) this.addSearchTerm(parts[0]);
+        if (parts.length) {
+            this.addSearchTerm(parts[0]);
+        }
     }
 
     protected buildDom() {
-        const headerElement = document.createElement("div");
-        headerElement.classList.add("coveo-recent-searches-header");
+        const headerElement = document.createElement('div');
+        headerElement.classList.add('coveo-recent-searches-header');
         headerElement.textContent = this.options.header;
         this.element.appendChild(headerElement);
 
-        this.listElement = document.createElement("ul");
-        this.listElement.classList.add("coveo-recent-searches-list");
+        this.listElement = document.createElement('ul');
+        this.listElement.classList.add('coveo-recent-searches-list');
         this.element.appendChild(this.listElement);
 
-        this.noTermsElement = document.createElement("div");
-        this.noTermsElement.classList.add("coveo-recent-searches-no-terms-message");
+        this.noTermsElement = document.createElement('div');
+        this.noTermsElement.classList.add('coveo-recent-searches-no-terms-message');
         this.element.appendChild(this.noTermsElement);
     }
 
@@ -82,18 +94,17 @@ export class RecentSearches extends Component {
     }
 
     protected renderNoTermsMessage() {
-        const action = this.terms.length > 0 ? "hide" : "show";
-        $(this.noTermsElement)[action]();
+        const display = this.terms.length > 0 ? 'none' : 'block';
+        this.noTermsElement.style.display = display;
     }
 
     protected resetDom() {
-        this.listElement.innerHTML = "";
+        this.listElement.innerHTML = '';
     }
 
     protected renderDom() {
-        const $el = $(this.listElement);
         this.terms.forEach((term) => {
-            let li = document.createElement("li");
+            const li = document.createElement('li');
             li.innerHTML = this.template({
                 searchPage: this.options.searchPage,
                 termUrlEncoded: encodeURIComponent(term),

@@ -39,7 +39,7 @@
     ],
     "new-parens": true,
     "no-arg": false,
-    "no-default-export": true,
+    "no-default-export": false,
     "no-duplicate-variable": true,
     "no-inferrable-types": [
       false

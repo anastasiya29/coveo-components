@@ -16,16 +16,19 @@
 export interface IFacetSliderForRangeOptions extends IFacetSliderOptions {
     minField?: IFieldOption;
     maxField?: IFieldOption;
-};
+}
 
 export default function lazyFacetSliderForRange(): Promise<IComponentDefinition> {
     function extendFacetQueryController(orig: FacetSliderQueryController, minField: string, maxField: string) {
         const base = { computeOurFilterExpression: orig.computeOurFilterExpression.bind(orig) };
         orig.computeOurFilterExpression = function computeOurFilterExpression(boundary) {
             var result = base.computeOurFilterExpression(boundary);
-            if (result) result += (" OR " + result.replace(minField, maxField));
+            if (result) {
+                result += (' OR ' + result.replace(minField, maxField));
+            }
+
             return result;
-        }
+        };
     }
 
     return Coveo.load<IComponentDefinition>('FacetSlider').then(() => {
@@ -40,7 +43,7 @@ export default function lazyFacetSliderForRange(): Promise<IComponentDefinition>
             static initOptions = (options: IFacetSliderForRangeOptions) => {
                 options.field = options.minField;
                 return options;
-            };
+            }
 
             constructor(public element: HTMLElement, public options: IFacetSliderForRangeOptions, bindings?: IComponentBindings, private slider?: Slider) {
                 super(
@@ -57,8 +60,8 @@ export default function lazyFacetSliderForRange(): Promise<IComponentDefinition>
             }
 
             private onFirstQuery(args: IDuringQueryEventArgs) {
-                args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.maxField), "maximum"));
-                args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.minField), "minimum"));
+                args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.maxField), 'maximum'));
+                args.queryBuilder.groupByRequests.push(FacetSliderForRange.getGroupByRequest(String(this.options.minField), 'minimum'));
             }
 
             private static getGroupByRequest(field: string, operation: string): IGroupByRequest {
@@ -67,13 +70,13 @@ export default function lazyFacetSliderForRange(): Promise<IComponentDefinition>
                     field: field,
                     generateAutomaticRanges: true,
                     maximumNumberOfValues: 1,
-                    sortCriteria: "nosort",
-                    "computedFields": [{ field: field, operation: operation }]
+                    sortCriteria: 'nosort',
+                    'computedFields': [{ field: field, operation: operation }]
                 };
             }
 
             private onFirstQuerySuccess(args: IQuerySuccessEventArgs) {
-                var maxFieldGroupBy = args.results.groupByResults.filter((x) => ("@" + x.field) === this.options.maxField).some((x) => {
+                const maxFieldGroupBy = args.results.groupByResults.filter((x) => ('@' + x.field) === this.options.maxField).some((x) => {
                     if (x.globalComputedFieldResults && x.globalComputedFieldResults.length) {
                         this.options.end = x.globalComputedFieldResults[0];
                         return true;
@@ -82,7 +85,7 @@ export default function lazyFacetSliderForRange(): Promise<IComponentDefinition>
                     return false;
                 });
 
-                var minFieldGroupBy = args.results.groupByResults.filter((x) => ("@" + x.field) === this.options.minField).some((x) => {
+                const minFieldGroupBy = args.results.groupByResults.filter((x) => ('@' + x.field) === this.options.minField).some((x) => {
                     if (x.globalComputedFieldResults && x.globalComputedFieldResults.length) {
                         this.options.start = x.globalComputedFieldResults[0];
                         return true;
@@ -94,14 +97,14 @@ export default function lazyFacetSliderForRange(): Promise<IComponentDefinition>
                 if (maxFieldGroupBy && minFieldGroupBy) {
                     super.reset();
                 } else {
-                    throw new Error("FacetSliderForRange.onFirstQuerySuccess: could not identify start or end value");
+                    throw new Error('FacetSliderForRange.onFirstQuerySuccess: could not identify start or end value');
                 }
             }
-        };
+        }
 
         Coveo.Initialization.registerAutoCreateComponent(FacetSliderForRange);
         return FacetSliderForRange;
     });
-};
+}
 
 Coveo.LazyInitialization.registerLazyComponent('FacetSliderForRange', lazyFacetSliderForRange);

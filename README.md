@@ -90,3 +90,5 @@ npm run dev
 </div>
 ```
 More information on using underscore templates in this Coveo blog post - [Reusing templates with UnderscoreJS](https://source.coveo.com/2014/10/19/reusing-templates-underscore/)
+
+* **Do not use jQuery**. Coveo's JavaScript framework does not have a dependency on jQuery so any custom component shouldn't either.

@@ -20,6 +20,7 @@ module.exports = {
   entry: {
     'coveo.extension': './src/Index'
   },
+  mode: 'development',
   output: {
     path: require('path').resolve('./bin/js'),
     // Output a filename based on the entry. This will generate a "coveo.extension.js" file.
